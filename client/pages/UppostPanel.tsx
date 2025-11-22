@@ -183,22 +183,22 @@ export default function UppostPanel() {
     <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Header />
       <main className="flex-1 w-full">
-        <div className="max-w-3xl mx-auto px-4 py-12">
-          <div className="flex justify-between items-center mb-8">
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="flex justify-between items-start mb-10">
             <div>
-              <h1 className="text-4xl font-black mb-2">Uppost Panel</h1>
-              <p className="text-muted-foreground">Logged in as: {auth.username}</p>
+              <h1 className="text-5xl md:text-6xl font-black mb-2">📤 Uppost Panel</h1>
+              <p className="text-muted-foreground">Logged in as: <span className="text-accent font-medium">{auth.username}</span></p>
             </div>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-destructive text-destructive-foreground rounded-lg hover:bg-opacity-90 transition-all"
+              className="flex items-center gap-2 px-4 py-2 bg-destructive text-destructive-foreground font-medium rounded-lg hover:bg-destructive/90 transition-all"
             >
               <LogOut className="w-5 h-5" />
               Logout
             </button>
           </div>
 
-          <form onSubmit={handleUpload} className="bg-card border border-border rounded-lg p-8 space-y-6">
+          <form onSubmit={handleUpload} className="bg-card border border-border rounded-xl p-10 space-y-8">
             {/* Title */}
             <div>
               <label className="block text-sm font-semibold mb-2">
