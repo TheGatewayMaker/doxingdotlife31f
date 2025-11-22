@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, LogOut } from "lucide-react";
+import { Upload, LogOut, Image, X } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -25,6 +25,8 @@ export default function UppostPanel() {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [server, setServer] = useState("");
+  const [thumbnail, setThumbnail] = useState<File | null>(null);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string>("");
   const [media, setMedia] = useState<File | null>(null);
   const [mediaPreview, setMediaPreview] = useState<string>("");
   const [uploading, setUploading] = useState(false);
