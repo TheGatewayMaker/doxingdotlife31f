@@ -355,6 +355,7 @@ export default function Index() {
 
   useEffect(() => {
     const loadPosts = async () => {
+      setIsLoadingPosts(true);
       try {
         const response = await fetch("/api/posts");
         const data: PostsResponse = await response.json();
@@ -362,6 +363,8 @@ export default function Index() {
       } catch (error) {
         console.error("Error loading posts:", error);
         setPosts([]);
+      } finally {
+        setIsLoadingPosts(false);
       }
     };
 
@@ -425,7 +428,7 @@ export default function Index() {
           <div className="max-w-5xl mx-auto px-4">
             <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 text-foreground tracking-tighter leading-tight">
-                🔍 Doxing Dot Life
+                �� Doxing Dot Life
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-8 max-w-3xl">
                 Find if you or someone you know have been Doxed
