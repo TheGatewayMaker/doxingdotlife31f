@@ -328,7 +328,7 @@ export default function UppostPanel() {
 
           <form
             onSubmit={handleUpload}
-            className="bg-card border border-border rounded-xl p-8 md:p-10 space-y-8 shadow-lg animate-fadeIn"
+            className="bg-card border border-border rounded-xl p-6 sm:p-8 md:p-10 space-y-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 animate-fadeIn"
             style={{ animationDelay: "0.2s" }}
           >
             {/* Title */}
