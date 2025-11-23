@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import { randomBytes } from "crypto";
 
 interface AuthRequest {
   username: string;
