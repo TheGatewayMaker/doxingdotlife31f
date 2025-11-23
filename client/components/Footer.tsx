@@ -4,9 +4,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
           <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
-            <h3 className="font-bold text-foreground mb-2 flex items-center gap-2">
-              🔍 Doxing Dot Life
-            </h3>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 shadow-md">
+                <img
+                  src="https://i.ibb.co/rG8yDddq/doxingdotlifelogogeniune888175141.png"
+                  alt="Doxing Dot Life Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="font-bold text-foreground">Doxing Dot Life</h3>
+            </div>
             <p className="text-sm text-muted-foreground">
               A comprehensive database for doxing information sharing
             </p>
