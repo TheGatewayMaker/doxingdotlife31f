@@ -30,8 +30,8 @@ googleProvider.addScope("profile");
 googleProvider.addScope("email");
 
 // Authorized email domains/accounts
-const AUTHORIZED_EMAILS = process.env.VITE_AUTHORIZED_EMAILS
-  ? process.env.VITE_AUTHORIZED_EMAILS.split(",").map((email) =>
+const AUTHORIZED_EMAILS = import.meta.env.VITE_AUTHORIZED_EMAILS
+  ? import.meta.env.VITE_AUTHORIZED_EMAILS.split(",").map((email) =>
       email.trim().toLowerCase(),
     )
   : [];
