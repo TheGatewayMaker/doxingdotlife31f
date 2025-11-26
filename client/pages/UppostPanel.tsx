@@ -152,11 +152,26 @@ export default function UppostPanel() {
       });
 
       if (!response.ok) {
-        throw new Error("Upload failed");
+        let errorMsg = "Upload failed";
+        try {
+          const errorData = await response.json();
+          if (errorData.error) {
+            errorMsg = errorData.error;
+          }
+          if (errorData.details) {
+            errorMsg += ` (${errorData.details})`;
+          }
+        } catch (parseError) {
+          console.error("Failed to parse error response", parseError);
+          errorMsg = `Upload failed with status ${response.status}`;
+        }
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
-      setUploadMessage("Post uploaded successfully!");
+      setUploadMessage(
+        `Post uploaded successfully! ${data.mediaCount ? `(${data.mediaCount} media file(s))` : ""}`,
+      );
       toast.success("Post uploaded successfully!");
       resetForm();
     } catch (error) {
