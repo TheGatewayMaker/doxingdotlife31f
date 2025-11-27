@@ -469,6 +469,21 @@ export default function UppostPanel() {
               </div>
             </div>
 
+            {/* NSFW Checkbox */}
+            <div className="flex items-center gap-3 bg-red-900/20 border border-red-600/50 rounded-lg p-4">
+              <input
+                type="checkbox"
+                id="nsfw-checkbox"
+                checked={nsfw}
+                onChange={(e) => setNsfw(e.target.checked)}
+                className="w-5 h-5 accent-red-600 rounded cursor-pointer"
+              />
+              <label htmlFor="nsfw-checkbox" className="flex-1 cursor-pointer">
+                <p className="text-sm font-bold text-red-400 mb-1">⚠️ Mark as NSFW</p>
+                <p className="text-xs text-red-300">This content is Not Safe For Work and requires age verification</p>
+              </label>
+            </div>
+
             {/* Media Upload */}
             <div>
               <label className="block text-sm font-bold mb-3 text-foreground">
