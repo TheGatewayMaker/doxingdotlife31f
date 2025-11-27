@@ -215,7 +215,7 @@ export default function SimpleMediaGallery({
       )}
 
       {/* Current Media Preview */}
-      {mediaFiles.length > 0 && (
+      {filteredMediaFiles.length > 0 && (
         <div className="bg-muted rounded-lg overflow-hidden border border-border">
           <div
             ref={mediaContainerRef}
