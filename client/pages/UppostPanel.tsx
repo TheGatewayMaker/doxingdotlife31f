@@ -688,8 +688,8 @@ export default function UppostPanel() {
                   </label>
                   <input
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={personalEmail}
+                    onChange={(e) => setPersonalEmail(e.target.value)}
                     className="w-full px-4 py-3 bg-background/50 border-2 border-border/60 hover:border-accent/60 rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent transition-all duration-200"
                     placeholder="e.g., user@example.com"
                   />
