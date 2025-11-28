@@ -296,43 +296,51 @@ export default function Index() {
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white flex flex-col animate-fadeIn">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col animate-fadeIn">
       <Header />
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <div className="bg-background pt-8 pb-8 md:pt-16 md:pb-12 border-b border-border">
+        <div className="bg-gradient-to-b from-blue-950/50 to-transparent py-8 md:py-16 border-b border-blue-500/20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 text-foreground tracking-tighter leading-tight">
+              <div className="mb-2">
+                <span className="inline-flex items-center px-3 py-1 bg-blue-600/20 text-blue-300 text-xs font-bold rounded-full border border-blue-500/40">
+                  🔍 Information Database
+                </span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 text-white tracking-tighter leading-tight">
                 Doxing Dot Life
               </h1>
-              <p className="text-base sm:text-lg md:text-xl font-semibold text-muted-foreground mb-6 max-w-2xl">
-                Find if you or someone you know have been Doxed
+              <p className="text-base sm:text-lg md:text-xl font-medium text-gray-300 mb-6 max-w-3xl">
+                Search our comprehensive database to find if you or someone you know have been documented. Professional information sharing platform.
               </p>
             </div>
 
             {/* Search Bar */}
             <div
-              className="relative mb-4 animate-fadeIn"
+              className="relative mb-8 animate-fadeIn"
               style={{ animationDelay: "0.2s" }}
             >
               <input
                 type="text"
-                placeholder="Search Doxed Individuals"
+                placeholder="Search by name, username, or details..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 bg-card border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-sm sm:text-base transition-all"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-slate-800/80 border border-blue-500/30 hover:border-blue-500/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 text-sm sm:text-base transition-all shadow-lg"
               />
-              <Search className="absolute right-4 sm:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+              <Search className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
             </div>
 
-            {/* Categories Section */}
+            {/* Filters Section */}
             <div
-              className="mb-0 animate-fadeIn"
+              className="animate-fadeIn"
               style={{ animationDelay: "0.3s" }}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <p className="text-xs sm:text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">
+                Refine Your Search
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {/* Country Dropdown */}
                 <div className="relative group">
                   <label className="text-sm font-bold text-foreground block mb-3 flex items-center gap-2">
