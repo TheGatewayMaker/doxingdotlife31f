@@ -1,11 +1,9 @@
 [build]
   command = "npm run build:client"
-  functions = "netlify/functions"
   publish = "dist/spa"
+  functions = "netlify/functions"
 
-[[functions]]
-  name = "api"
-  timeout = 540
+[functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
   external_node_modules = ["express", "cors"]
