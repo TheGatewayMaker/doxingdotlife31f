@@ -208,7 +208,6 @@ const COUNTRIES = [
   "Zimbabwe",
 ].sort();
 
-
 export default function Index() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");

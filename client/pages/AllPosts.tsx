@@ -4,7 +4,12 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Post, PostsResponse } from "@shared/api";
-import { GlobeIcon, MapPinIcon, ServerIcon, CloseIcon } from "@/components/Icons";
+import {
+  GlobeIcon,
+  MapPinIcon,
+  ServerIcon,
+  CloseIcon,
+} from "@/components/Icons";
 import { Flame, Search } from "lucide-react";
 
 const COUNTRIES = [
