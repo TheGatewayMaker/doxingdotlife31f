@@ -303,7 +303,7 @@ export default function AllPosts() {
         {/* Hero Section */}
         <div className="bg-[#000000] pt-8 pb-8 md:pt-16 md:pb-12 border-b border-[#666666]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="animate-fadeIn" style={{ animationDelay: "0.1s" }}>
+            <div className="animate-slideInLeftFade" style={{ animationDelay: "0.1s" }}>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 text-white tracking-tighter leading-tight">
                 All Posts
               </h1>
@@ -314,7 +314,7 @@ export default function AllPosts() {
 
             {/* Search Bar */}
             <div
-              className="relative mb-4 animate-fadeIn"
+              className="relative mb-4 animate-scaleUpFadeIn"
               style={{ animationDelay: "0.2s" }}
             >
               <input
@@ -329,7 +329,7 @@ export default function AllPosts() {
 
             {/* Categories Section */}
             <div
-              className="mb-0 animate-fadeIn"
+              className="mb-0 animate-slideInUp"
               style={{ animationDelay: "0.3s" }}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -445,7 +445,7 @@ export default function AllPosts() {
 
         {/* All Posts */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-          <div className="mb-10 sm:mb-12 animate-fadeIn">
+          <div className="mb-10 sm:mb-12 animate-slideInUp">
             {isLoadingPosts ? (
               <>
                 <h2 className="text-5xl md:text-6xl font-black mb-3 flex items-center gap-3 text-white">
@@ -492,8 +492,8 @@ export default function AllPosts() {
                   <div
                     key={post.id}
                     onClick={() => navigate(`/post/${post.id}`)}
-                    className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-fadeIn bg-[#1a1a1a] border border-[#666666] hover:border-[#0088CC] hover:shadow-xl hover:shadow-[#0088CC]/20"
-                    style={{ animationDelay: `${idx * 0.05}s` }}
+                    className="group rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-scaleUpFadeIn bg-[#1a1a1a] border border-[#666666] hover:border-[#0088CC] hover:shadow-xl hover:shadow-[#0088CC]/20"
+                    style={{ animationDelay: `${idx * 0.08}s` }}
                   >
                     {post.thumbnail && (
                       <div className="w-full h-40 bg-muted overflow-hidden flex items-center justify-center">
@@ -564,7 +564,7 @@ export default function AllPosts() {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 animate-fadeIn">
+                <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 animate-slideInUp" style={{ animationDelay: "0.4s" }}>
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
@@ -603,7 +603,8 @@ export default function AllPosts() {
               )}
             </>
           ) : (
-            <div className="text-center py-16 animate-fadeIn">
+            <div className="text-center py-16 animate-popIn" style={{ animationDelay: "0.2s" }}>
+              <div className="text-5xl sm:text-6xl mb-4 animate-slideInDown" style={{ animationDelay: "0.3s" }}>📋</div>
               <p className="text-gray-400 text-base sm:text-lg">
                 No posts match your search criteria. Try adjusting your filters.
               </p>
