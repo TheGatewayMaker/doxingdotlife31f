@@ -48,14 +48,14 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
+      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col animate-fadeIn">
         <Header />
-        <main className="flex-1 w-full flex items-center justify-center">
+        <main className="flex-1 w-full flex items-center justify-center px-4">
           <div className="text-center">
-            <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-muted border-t-accent rounded-full"></div>
+            <div className="inline-block animate-spin mb-4">
+              <div className="w-14 h-14 border-4 border-gray-600 border-t-gray-300 rounded-full"></div>
             </div>
-            <p className="mt-4 text-muted-foreground">Loading post...</p>
+            <p className="text-gray-400 text-lg">Loading post...</p>
           </div>
         </main>
         <Footer />
@@ -65,16 +65,20 @@ export default function PostDetail() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
+      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col animate-fadeIn">
         <Header />
-        <main className="flex-1 w-full flex items-center justify-center">
+        <main className="flex-1 w-full flex items-center justify-center px-4">
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">
+            <div className="text-6xl mb-4">⚠️</div>
+            <h2 className="text-3xl font-bold mb-4 text-white">
               {error || "Post not found"}
             </h2>
+            <p className="text-gray-400 mb-6 max-w-sm">
+              The post you're looking for doesn't exist or has been removed.
+            </p>
             <button
               onClick={() => navigate("/")}
-              className="px-4 py-2 bg-accent text-accent-foreground font-medium rounded-lg hover:bg-accent/90 transition-all"
+              className="px-6 py-3 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-600 transition-all shadow-md"
             >
               ← Back to Home
             </button>
@@ -87,7 +91,7 @@ export default function PostDetail() {
 
   if (showNSFWWarning && !nsfwApproved && post.nsfw) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
+      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col animate-fadeIn">
         <Header />
         <main className="flex-1 w-full flex items-center justify-center p-4">
           <NSFWWarningModal
@@ -118,14 +122,14 @@ export default function PostDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col animate-fadeIn">
+    <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white flex flex-col animate-fadeIn">
       <Header />
       <main className="flex-1 w-full">
-        <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12">
           {/* Back Button */}
           <button
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 px-4 py-2 mb-8 text-muted-foreground hover:text-foreground transition-colors font-medium animate-fadeIn"
+            className="flex items-center gap-2 px-4 py-2 mb-8 text-gray-500 hover:text-gray-200 transition-all duration-200 font-semibold animate-fadeIn hover:translate-x-[-4px]"
           >
             <svg
               className="w-5 h-5"
@@ -139,119 +143,152 @@ export default function PostDetail() {
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            Back to Home
+            <span>Back to Home</span>
           </button>
 
           {/* Main Content Container - Max Width */}
-          <div className="max-w-4xl mx-auto">
-            {/* NSFW Banner */}
+          <div className="max-w-5xl mx-auto">
+            {/* NSFW Warning Banner */}
             {post.nsfw && (
-              <div className="mb-6 bg-red-900/20 border border-red-600/40 rounded-lg p-4 flex items-start gap-3">
-                <svg
-                  className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-                </svg>
-                <div>
-                  <p className="font-semibold text-red-400">NSFW Content</p>
-                  <p className="text-sm text-red-300/80">
-                    This is NSFW content. Ensure you're viewing in an
-                    appropriate setting.
+              <div className="mb-8 bg-gray-800 border border-gray-700 rounded-xl p-4 sm:p-5 flex items-start gap-3 sm:gap-4 animate-fadeIn">
+                <div className="text-3xl flex-shrink-0">🔞</div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-gray-300 mb-1">
+                    NSFW Content Warning
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    This post contains explicit content. Ensure you're viewing
+                    in an appropriate and private setting.
                   </p>
                 </div>
               </div>
             )}
 
-            {/* Thumbnail */}
-            {post.thumbnail && !thumbnailError && (
-              <div className="mb-8 rounded-xl overflow-hidden border border-border shadow-lg animate-fadeIn max-w-2xl mx-auto">
-                <img
-                  src={post.thumbnail}
-                  alt={post.title}
-                  className="w-full h-auto object-cover"
-                  onError={() => setThumbnailError(true)}
-                  crossOrigin="anonymous"
-                />
-              </div>
-            )}
-
-            {thumbnailError && (
-              <div className="mb-8 w-full h-96 bg-muted flex items-center justify-center rounded-xl border border-border">
-                <div className="text-center">
-                  <div className="text-7xl mb-4">🖼️</div>
-                  <p className="text-muted-foreground text-lg">
-                    Thumbnail unavailable
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Title */}
-            <div
-              className="mb-6 animate-fadeIn"
+            {/* Thumbnail Section */}
+            <section
+              className="mb-10 sm:mb-12 animate-fadeIn"
               style={{ animationDelay: "0.1s" }}
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 text-foreground leading-tight">
-                {post.title}
-              </h1>
+              {post.thumbnail && !thumbnailError && (
+                <div className="rounded-xl overflow-hidden border border-gray-700 shadow-2xl max-w-3xl mx-auto">
+                  <img
+                    src={post.thumbnail}
+                    alt={post.title}
+                    className="w-full h-auto object-cover"
+                    onError={() => setThumbnailError(true)}
+                    crossOrigin="anonymous"
+                  />
+                </div>
+              )}
 
-              {/* Post Date */}
-              <p className="text-muted-foreground text-sm sm:text-base">
-                Posted on{" "}
-                {new Date(post.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </p>
-            </div>
+              {thumbnailError && (
+                <div className="w-full h-96 bg-gray-800 flex items-center justify-center rounded-xl border border-gray-700">
+                  <div className="text-center">
+                    <div className="text-8xl mb-3">🖼️</div>
+                    <p className="text-gray-500">Thumbnail unavailable</p>
+                  </div>
+                </div>
+              )}
+            </section>
 
-            {/* Description Section */}
-            <div
-              className="mb-10 animate-fadeIn"
+            {/* Title & Info Section */}
+            <section
+              className="mb-10 sm:mb-12 animate-fadeIn"
               style={{ animationDelay: "0.2s" }}
             >
-              <PostDescriptionSection
-                description={post.description}
-                tags={{
-                  country: post.country,
-                  city: post.city,
-                  server: post.server,
-                }}
-              />
-            </div>
+              <div className="mb-4">
+                <div className="flex flex-wrap items-center gap-2 mb-4">
+                  {post.nsfw && (
+                    <span className="inline-flex items-center px-3 py-1 bg-gray-600 text-white text-xs font-bold rounded-full">
+                      NSFW
+                    </span>
+                  )}
+                  <span className="inline-flex items-center px-3 py-1 bg-gray-700 text-gray-300 text-xs font-semibold rounded-full border border-gray-600">
+                    📰 Post
+                  </span>
+                </div>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 text-white leading-tight">
+                  {post.title}
+                </h1>
+              </div>
+
+              {/* Post Metadata */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 text-xs sm:text-sm text-gray-500 space-y-2 sm:space-y-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">📅</span>
+                  <span>
+                    {new Date(post.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                </div>
+                <div className="hidden sm:block w-1 h-1 bg-gray-700 rounded-full"></div>
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🕒</span>
+                  <span>
+                    {new Date(post.createdAt).toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            {/* Description Section */}
+            <section
+              className="mb-10 sm:mb-12 animate-fadeIn"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 sm:p-8">
+                <h2 className="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span>📋</span>
+                  Overview
+                </h2>
+                <PostDescriptionSection
+                  description={post.description}
+                  tags={{
+                    country: post.country,
+                    city: post.city,
+                    server: post.server,
+                  }}
+                />
+              </div>
+            </section>
 
             {/* Media Section */}
             {post.mediaFiles && post.mediaFiles.length > 0 && (
-              <div
-                className="mb-10 animate-fadeIn"
-                style={{ animationDelay: "0.3s" }}
+              <section
+                className="mb-10 sm:mb-12 animate-fadeIn"
+                style={{ animationDelay: "0.4s" }}
               >
+                <h2 className="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-2">
+                  <span>📁</span>
+                  Media Gallery
+                </h2>
                 <PostMediaSection
                   mediaFiles={post.mediaFiles}
                   postTitle={post.title}
                   thumbnailUrl={post.thumbnail}
                 />
-              </div>
+              </section>
             )}
 
-            {/* Share Button */}
-            <div
-              className="border-t border-border pt-8 animate-fadeIn"
-              style={{ animationDelay: "0.4s" }}
+            {/* Share Section */}
+            <section
+              className="border-t border-gray-700 pt-8 sm:pt-10 animate-fadeIn"
+              style={{ animationDelay: "0.5s" }}
             >
               <button
                 onClick={handleShare}
-                className="flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-lg hover:bg-accent/90 transition-all shadow-md hover:shadow-lg active:scale-95"
+                className="flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600 transition-all shadow-lg hover:shadow-xl hover:shadow-gray-900/50 active:scale-95 text-sm sm:text-base"
               >
                 <Share2 className="w-5 h-5" />
-                Share Post
+                <span>Share This Post</span>
               </button>
-            </div>
+            </section>
           </div>
         </div>
       </main>
