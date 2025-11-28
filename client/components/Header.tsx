@@ -177,7 +177,7 @@ export default function Header() {
                 <div className="p-4 border-t border-[#666666]">
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#666666] text-white font-semibold rounded-lg hover:bg-[#555555] transition-all duration-200 shadow-md"
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-red-600/40"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Logout</span>
