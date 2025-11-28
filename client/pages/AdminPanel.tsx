@@ -472,7 +472,7 @@ export default function AdminPanel() {
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="px-3 sm:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-md hover:shadow-lg hover:shadow-blue-600/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-xs sm:text-sm flex items-center gap-1"
+                    className="px-3 sm:px-4 py-1.5 bg-[#0088CC] text-white font-semibold rounded-md hover:bg-[#0077BB] hover:shadow-lg hover:shadow-[#0088CC]/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-xs sm:text-sm flex items-center gap-1"
                   >
                     <svg
                       className="w-3 h-3"
@@ -501,8 +501,8 @@ export default function AdminPanel() {
                           className={cn(
                             "w-7 h-7 sm:w-8 sm:h-8 rounded-md font-semibold transition-all text-xs shadow-sm hover:shadow-md",
                             currentPage === pageNum
-                              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/30"
-                              : "bg-card border-2 border-border hover:border-blue-500/40 text-foreground hover:shadow-lg hover:shadow-blue-500/10",
+                              ? "bg-[#0088CC] text-white shadow-lg shadow-[#0088CC]/30"
+                              : "bg-card border-2 border-border hover:border-[#0088CC]/40 text-foreground hover:shadow-lg hover:shadow-[#0088CC]/10",
                           )}
                         >
                           {pageNum}
@@ -515,7 +515,7 @@ export default function AdminPanel() {
                       setCurrentPage(Math.min(totalPages, currentPage + 1))
                     }
                     disabled={currentPage === totalPages}
-                    className="px-3 sm:px-4 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-md hover:shadow-lg hover:shadow-blue-600/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-xs sm:text-sm flex items-center gap-1"
+                    className="px-3 sm:px-4 py-1.5 bg-[#0088CC] text-white font-semibold rounded-md hover:bg-[#0077BB] hover:shadow-lg hover:shadow-[#0088CC]/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-md active:scale-95 text-xs sm:text-sm flex items-center gap-1"
                   >
                     Next
                     <svg
@@ -548,9 +548,9 @@ export default function AdminPanel() {
       {/* Delete Confirmation Modal */}
       {deletingPostId && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4 animate-fadeIn">
-          <div className="bg-gradient-to-br from-card via-card to-card/95 border-2 border-border/60 rounded-2xl max-w-sm w-full p-8 shadow-2xl animate-slideInScale">
+          <div className="bg-card border-2 border-border/60 rounded-2xl max-w-sm w-full p-8 shadow-2xl animate-slideInScale">
             <div className="flex items-center gap-4 mb-6">
-              <div className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-gradient-to-br from-red-600/20 to-red-700/20 border border-red-600/30">
+              <div className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-red-600/20 border border-red-600/30">
                 <svg
                   className="h-7 w-7 text-red-600"
                   fill="none"
@@ -589,7 +589,7 @@ export default function AdminPanel() {
               <button
                 onClick={confirmDeletePost}
                 disabled={isDeletingPost}
-                className="flex-1 px-4 py-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-red-600/50 disabled:opacity-40 transition-all flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-red-600/50 disabled:opacity-40 transition-all flex items-center justify-center gap-2"
               >
                 <TrashIcon className="w-4 h-4" />
                 {isDeletingPost ? "Deleting..." : "Delete"}
