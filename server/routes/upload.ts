@@ -149,7 +149,10 @@ export const handleUpload: RequestHandler = async (req, res) => {
           );
 
           const mediaFileMimeType = mediaFile.mimetype
-            ? detectImageMimeType(mediaFile.mimetype, mediaFile.originalname || "media")
+            ? detectImageMimeType(
+                mediaFile.mimetype,
+                mediaFile.originalname || "media",
+              )
             : "application/octet-stream";
 
           await uploadMediaFile(
