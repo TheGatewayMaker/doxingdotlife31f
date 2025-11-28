@@ -323,7 +323,6 @@ export default function Index() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
   const [selectedServer, setSelectedServer] = useState("");
   const [servers, setServers] = useState<string[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -332,17 +331,9 @@ export default function Index() {
   const [postsPerPage] = useState(12);
   const [currentPage, setCurrentPage] = useState(1);
   const [countrySearch, setCountrySearch] = useState("");
-  const [citySearch, setCitySearch] = useState("");
   const [serverSearch, setServerSearch] = useState("");
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [hasSearchFilters, setHasSearchFilters] = useState(false);
-  const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
-
-  const allCities = Object.values(CITIES_BY_COUNTRY).flat();
-  const uniqueCities = Array.from(new Set(allCities)).sort();
-  const availableCities = uniqueCities.filter((city) =>
-    city.toLowerCase().includes(citySearch.toLowerCase()),
-  );
 
   const filteredCountries = COUNTRIES.filter((country) =>
     country.toLowerCase().includes(countrySearch.toLowerCase()),
@@ -351,25 +342,6 @@ export default function Index() {
   const filteredServers = servers.filter((server) =>
     server.toLowerCase().includes(serverSearch.toLowerCase()),
   );
-
-  const searchSuggestions = searchQuery
-    ? posts
-        .filter(
-          (post) =>
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.description.toLowerCase().includes(searchQuery.toLowerCase()),
-        )
-        .sort((a, b) => {
-          const aIndex = a.title
-            .toLowerCase()
-            .indexOf(searchQuery.toLowerCase());
-          const bIndex = b.title
-            .toLowerCase()
-            .indexOf(searchQuery.toLowerCase());
-          return aIndex - bIndex;
-        })
-        .slice(0, 8)
-    : [];
 
   useEffect(() => {
     const loadPosts = async () => {
