@@ -108,7 +108,9 @@ export const handler = async (event: any, context: any) => {
       result = await serverlessHandler(event, context);
     } catch (serverError) {
       const serverErrorMessage =
-        serverError instanceof Error ? serverError.message : String(serverError);
+        serverError instanceof Error
+          ? serverError.message
+          : String(serverError);
       console.error(
         `[${new Date().toISOString()}] ❌ Serverless handler error:`,
         serverErrorMessage,

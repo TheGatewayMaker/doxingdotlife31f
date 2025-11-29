@@ -80,7 +80,12 @@ export const handleUpload: RequestHandler = async (req, res, next) => {
         thumbnail: !!files?.thumbnail,
       });
       if (!res.headersSent) {
-        res.status(400).json({ error: "Missing required fields: title, description, media files, and thumbnail are all required" });
+        res
+          .status(400)
+          .json({
+            error:
+              "Missing required fields: title, description, media files, and thumbnail are all required",
+          });
         responseSent = true;
       }
       return;
