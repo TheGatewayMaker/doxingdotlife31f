@@ -16,6 +16,28 @@ interface UploadRequest {
   nsfw?: string | boolean;
 }
 
+const sanitizeFileName = (fileName: string): string => {
+  // Remove path separators and dangerous characters
+  let sanitized = fileName
+    .replace(/\\/g, '') // Remove backslashes
+    .replace(/\//g, '') // Remove forward slashes
+    .replace(/\0/g, '') // Remove null bytes
+    .replace(/[<>:"|?*]/g, '') // Remove Windows reserved chars
+    .trim();
+
+  // Ensure it's not empty and not a reserved name
+  if (!sanitized || sanitized === '.' || sanitized === '..') {
+    return 'file';
+  }
+
+  // Limit filename length to prevent issues
+  if (sanitized.length > 255) {
+    sanitized = sanitized.substring(0, 240) + sanitized.substring(sanitized.length - 15);
+  }
+
+  return sanitized;
+};
+
 const detectImageMimeType = (
   originalMimetype: string | undefined,
   fileName: string,
