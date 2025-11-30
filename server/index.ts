@@ -4,6 +4,7 @@ import multer from "multer";
 import { handleDemo } from "./routes/demo";
 import { handleUpload } from "./routes/upload";
 import { handleGenerateUploadUrls } from "./routes/generate-upload-urls";
+import { handleUploadMetadata } from "./routes/upload-metadata";
 import { handleGetPosts } from "./routes/posts";
 import { handleGetServers } from "./routes/servers";
 import {
