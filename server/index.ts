@@ -236,6 +236,13 @@ export function createServer() {
     asyncHandler(handleGenerateUploadUrls),
   );
 
+  // Metadata storage route (after files have been uploaded to R2)
+  app.post(
+    "/api/upload-metadata",
+    authMiddleware,
+    asyncHandler(handleUploadMetadata),
+  );
+
   app.post(
     "/api/upload",
     uploadTimeout,
