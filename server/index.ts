@@ -320,6 +320,7 @@ export function createServer() {
     "/api/upload",
     uploadTimeout,
     authMiddleware,
+    validateUploadRequest,
     (req, res, next) => {
       try {
         upload.fields([
