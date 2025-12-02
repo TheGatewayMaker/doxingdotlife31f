@@ -39,10 +39,11 @@ export function createServer() {
     }),
   );
 
-  // JSON and URL-encoded body parsing - no limits for VPS
+  // JSON and URL-encoded body parsing with increased limits for VPS
   // Note: multipart/form-data is NOT parsed by these - it's handled by multer
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  // Set limits to 500MB to allow large payloads
+  app.use(express.json({ limit: "500mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "500mb" }));
 
   // Error handling for body parsing
   app.use(
