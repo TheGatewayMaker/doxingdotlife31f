@@ -90,20 +90,70 @@ export const verifyFirebaseToken = async (
       `[${new Date().toISOString()}] Starting token verification... Token length: ${idToken.length}`,
     );
 
+    // Verify token is a non-empty string
+    if (!idToken || typeof idToken !== "string" || idToken.trim().length === 0) {
+      console.error("Token is invalid: empty or not a string", {
+        tokenType: typeof idToken,
+        tokenLength: idToken?.length || 0,
+      });
+      throw new Error("Token is empty or invalid format");
+    }
+
     const app = initializeFirebaseAdmin();
 
     if (!app) {
       console.error(
         "Firebase Admin SDK is not initialized - check configuration",
       );
-      throw new Error("Firebase Admin SDK not initialized");
+      console.error("Environment variables check:", {
+        hasProjectId: !!process.env.FIREBASE_PROJECT_ID,
+        hasPrivateKey: !!process.env.FIREBASE_PRIVATE_KEY,
+        hasClientEmail: !!process.env.FIREBASE_CLIENT_EMAIL,
+        privateKeyStart: process.env.FIREBASE_PRIVATE_KEY?.substring(0, 50),
+      });
+      throw new Error(
+        "Firebase Admin SDK not initialized - check env variables FIREBASE_PROJECT_ID, FIREBASE_PRIVATE_KEY, FIREBASE_CLIENT_EMAIL",
+      );
     }
 
     console.log(
       `[${new Date().toISOString()}] Firebase Admin SDK initialized, verifying token...`,
     );
 
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    let decodedToken;
+    try {
+      decodedToken = await admin.auth().verifyIdToken(idToken);
+    } catch (verifyError) {
+      const errorMsg =
+        verifyError instanceof Error ? verifyError.message : String(verifyError);
+      console.error(
+        `[${new Date().toISOString()}] Firebase token verification error: ${errorMsg}`,
+      );
+      console.error("Verification error details:", {
+        errorName: verifyError instanceof Error ? verifyError.name : "unknown",
+        errorCode: (verifyError as any)?.code || "no-code",
+        message: errorMsg,
+      });
+
+      // Provide more specific error messages
+      if (
+        errorMsg.includes("Token used too early") ||
+        errorMsg.includes("iat")
+      ) {
+        throw new Error("Token used too early (clock skew issue)");
+      } else if (
+        errorMsg.includes("Token expired") ||
+        errorMsg.includes("exp")
+      ) {
+        throw new Error("Token has expired - please sign in again");
+      } else if (errorMsg.includes("invalid") || errorMsg.includes("malformed")) {
+        throw new Error(
+          "Token is malformed or invalid - please sign in again",
+        );
+      } else {
+        throw new Error(`Firebase token verification failed: ${errorMsg}`);
+      }
+    }
 
     console.log(
       `[${new Date().toISOString()}] Token decoded successfully. UID: ${decodedToken.uid}, Email: ${decodedToken.email}`,
@@ -153,7 +203,9 @@ export const verifyFirebaseToken = async (
       `[${new Date().toISOString()}] Token verification failed: ${errorMsg}`,
     );
     console.error("Full error details:", error);
-    throw new Error("Invalid or expired token");
+    throw error instanceof Error
+      ? error
+      : new Error("Invalid or expired token");
   }
 };
 
