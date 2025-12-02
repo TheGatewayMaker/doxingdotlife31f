@@ -105,7 +105,11 @@ export const verifyFirebaseToken = async (
     );
 
     // Verify token is a non-empty string
-    if (!idToken || typeof idToken !== "string" || idToken.trim().length === 0) {
+    if (
+      !idToken ||
+      typeof idToken !== "string" ||
+      idToken.trim().length === 0
+    ) {
       console.error("Token is invalid: empty or not a string", {
         tokenType: typeof idToken,
         tokenLength: idToken?.length || 0,
@@ -139,7 +143,9 @@ export const verifyFirebaseToken = async (
       decodedToken = await admin.auth().verifyIdToken(idToken);
     } catch (verifyError) {
       const errorMsg =
-        verifyError instanceof Error ? verifyError.message : String(verifyError);
+        verifyError instanceof Error
+          ? verifyError.message
+          : String(verifyError);
       console.error(
         `[${new Date().toISOString()}] Firebase token verification error: ${errorMsg}`,
       );
@@ -160,10 +166,11 @@ export const verifyFirebaseToken = async (
         errorMsg.includes("exp")
       ) {
         throw new Error("Token has expired - please sign in again");
-      } else if (errorMsg.includes("invalid") || errorMsg.includes("malformed")) {
-        throw new Error(
-          "Token is malformed or invalid - please sign in again",
-        );
+      } else if (
+        errorMsg.includes("invalid") ||
+        errorMsg.includes("malformed")
+      ) {
+        throw new Error("Token is malformed or invalid - please sign in again");
       } else {
         throw new Error(`Firebase token verification failed: ${errorMsg}`);
       }

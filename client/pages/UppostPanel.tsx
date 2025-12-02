@@ -273,8 +273,7 @@ export default function UppostPanel() {
           errorMsg +=
             " (Your email is not authorized to upload. Contact the administrator.)";
         } else if (uploadResponse.status === 500) {
-          errorMsg +=
-            " (Server error - the administrator has been notified.)";
+          errorMsg += " (Server error - the administrator has been notified.)";
         }
 
         throw new Error(errorMsg);
