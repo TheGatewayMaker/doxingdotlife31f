@@ -882,11 +882,11 @@ export default function UppostPanel() {
             </div>
 
             {/* Media Upload */}
-            <div>
-              <label className="block text-sm font-bold mb-3 text-foreground">
+            <div className="animate-slideInUp" style={{ animationDelay: "0.51s" }}>
+              <label className="block text-xs sm:text-sm font-bold mb-2 sm:mb-3 text-foreground">
                 Media Files <span className="text-destructive">*</span>
               </label>
-              <div className="border-2 border-dashed border-border/70 rounded-2xl p-10 text-center cursor-pointer hover:border-accent/70 hover:bg-accent/10 bg-background/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
+              <div className="border-2 border-dashed border-border/70 rounded-lg sm:rounded-2xl p-6 sm:p-10 text-center cursor-pointer hover:border-accent/70 hover:bg-accent/10 bg-background/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
                 <input
                   type="file"
                   onChange={handleMediaChange}
@@ -897,9 +897,9 @@ export default function UppostPanel() {
                 />
                 <label htmlFor="media-upload" className="cursor-pointer block">
                   {mediaFiles.length > 0 ? (
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <svg
-                        className="w-6 h-6 mx-auto text-accent"
+                        className="w-5 h-5 sm:w-6 sm:h-6 mx-auto text-accent"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -907,7 +907,7 @@ export default function UppostPanel() {
                       >
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
-                      <p className="text-sm font-bold text-accent">
+                      <p className="text-xs sm:text-sm font-bold text-accent">
                         {mediaFiles.length} file
                         {mediaFiles.length !== 1 ? "s" : ""} selected
                       </p>
@@ -916,9 +916,9 @@ export default function UppostPanel() {
                       </p>
                     </div>
                   ) : (
-                    <div className="space-y-3">
-                      <UploadIcon className="w-10 h-10 mx-auto text-muted-foreground" />
-                      <p className="text-sm font-bold text-foreground">
+                    <div className="space-y-2 sm:space-y-3">
+                      <UploadIcon className="w-8 h-8 sm:w-10 sm:h-10 mx-auto text-muted-foreground" />
+                      <p className="text-xs sm:text-sm font-bold text-foreground">
                         Click to upload media files
                       </p>
                       <p className="text-xs text-muted-foreground">
