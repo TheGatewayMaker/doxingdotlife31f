@@ -6,6 +6,7 @@ import {
   updateServersList,
   uploadPostMetadataWithThumbnail,
 } from "../utils/r2-storage";
+import { verifyFirebaseToken } from "../utils/firebase-admin";
 
 interface UploadRequest {
   title: string;
@@ -74,12 +75,73 @@ export const handleUpload: RequestHandler = async (req, res, next) => {
   let responseSent = false;
 
   try {
+    // Authorization check - verify user has authorized email
+    const authorizedEmails = process.env.VITE_AUTHORIZED_EMAILS || "";
+    let userEmail: string | null = null;
+
+    // Check if user has a valid session with authorized email
+    if (req.user && req.user.email) {
+      userEmail = req.user.email;
+      console.log(
+        `[${new Date().toISOString()}] Upload authorized via session: ${userEmail}`,
+      );
+    } else {
+      // Try to verify Firebase token from Authorization header as fallback
+      const authHeader = req.get("Authorization");
+      if (authHeader && authHeader.startsWith("Bearer ")) {
+        const idToken = authHeader.substring(7);
+        try {
+          const verifiedToken = await verifyFirebaseToken(idToken);
+          if (verifiedToken.isAuthorized) {
+            userEmail = verifiedToken.email || null;
+            console.log(
+              `[${new Date().toISOString()}] Upload authorized via Firebase token: ${userEmail}`,
+            );
+          } else {
+            console.error(
+              `[${new Date().toISOString()}] Email not in authorized list: ${verifiedToken.email}`,
+            );
+            if (!res.headersSent) {
+              res.status(403).json({
+                error: "Your email is not authorized to upload. Contact the administrator.",
+                email: verifiedToken.email,
+              });
+              responseSent = true;
+            }
+            return;
+          }
+        } catch (tokenError) {
+          console.warn(
+            `[${new Date().toISOString()}] Token verification failed:`,
+            tokenError,
+          );
+        }
+      }
+    }
+
+    // If no valid authorization found, reject the request
+    if (!userEmail) {
+      console.warn(
+        `[${new Date().toISOString()}] Upload rejected - no valid authorization`,
+      );
+      if (!res.headersSent) {
+        res.status(401).json({
+          error: "You must be logged in with an authorized email to upload posts.",
+          details:
+            "Please sign in again. If you believe your email should be authorized, contact the administrator.",
+        });
+        responseSent = true;
+      }
+      return;
+    }
+
     // Log upload attempt for debugging Netlify issues
     const isNetlify = process.env.NETLIFY === "true";
     const contentLength = req.get("content-length");
     console.log(
       `[${new Date().toISOString()}] Upload request received on ${isNetlify ? "NETLIFY" : "LOCAL"}`,
       {
+        user: userEmail,
         hasFiles: !!req.files,
         filesType: typeof req.files,
         filesKeys: req.files ? Object.keys(req.files) : [],
