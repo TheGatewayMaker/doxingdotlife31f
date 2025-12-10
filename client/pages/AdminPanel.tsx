@@ -277,18 +277,18 @@ export default function AdminPanel() {
 
       <main className="flex-1 w-full">
         {/* Hero Section */}
-        <div className="bg-background py-4 md:py-6 border-b border-border/40">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-background py-3 md:py-5 border-b border-border/40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
               className="animate-slideInLeftFade"
               style={{ animationDelay: "0.1s" }}
             >
-              <div className="flex items-center gap-2 mb-3">
-                <div>
-                  <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight leading-tight">
+              <div className="flex items-start gap-2 mb-3 sm:mb-4">
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight leading-tight">
                     Admin Panel
                   </h1>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
                     Manage your posts
                   </p>
                 </div>
@@ -297,34 +297,34 @@ export default function AdminPanel() {
 
             {/* Search Bar */}
             <div
-              className="relative animate-scaleUpFadeIn mt-4"
+              className="relative animate-scaleUpFadeIn mt-3 sm:mt-4"
               style={{ animationDelay: "0.2s" }}
             >
               <div className="relative">
-                <SearchIcon className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                <SearchIcon className="absolute left-2.5 sm:left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                 <input
                   type="text"
                   placeholder="Search posts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-3 sm:px-4 py-2.5 bg-card border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-sm transition-all pl-10 sm:pl-11"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-card border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-xs sm:text-sm transition-all pl-8 sm:pl-9"
                 />
               </div>
             </div>
 
             {/* Filter Section */}
             <div
-              className="bg-card border border-border rounded-lg p-4 mt-3 animate-slideInUp"
+              className="bg-card border border-border rounded-lg p-3 sm:p-4 mt-2 sm:mt-3 animate-slideInUp"
               style={{ animationDelay: "0.3s" }}
             >
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-3">
                 <div>
                   <h3 className="text-xs font-bold text-foreground uppercase tracking-wider">
                     Filter
                   </h3>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {/* Country Dropdown */}
                 <div className="relative group">
                   <label className="text-xs font-bold text-foreground block mb-2 flex items-center gap-1.5">
