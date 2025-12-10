@@ -123,17 +123,13 @@ export default function EditPostModal({
 
     try {
       setIsSaving(true);
-      const idToken = await getIdToken();
-      if (!idToken) {
-        throw new Error("Authentication token not available");
-      }
 
       const response = await fetch(`/api/posts/${post.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${idToken}`,
         },
+        credentials: "include", // Send session cookie
         body: JSON.stringify({
           title: title.trim(),
           description: description.trim(),
