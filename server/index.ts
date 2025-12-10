@@ -230,18 +230,6 @@ export function createServer() {
       });
     }
 
-    // Validate Authorization header exists
-    const authHeader = req.get("authorization");
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      console.error(
-        `[${new Date().toISOString()}] Missing or invalid Authorization header`,
-      );
-      return res.status(401).json({
-        error: "Unauthorized",
-        details: "Authorization header is required",
-      });
-    }
-
     console.log(
       `[${new Date().toISOString()}] Valid upload request: ${contentType}`,
     );
