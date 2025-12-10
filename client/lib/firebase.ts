@@ -120,7 +120,7 @@ export const createServerSession = async (idToken: string): Promise<void> => {
 };
 
 /**
- * Sign out the current user
+ * Sign out the current user and clear server session
  */
 export const signOutUser = async (): Promise<void> => {
   if (!auth) {
@@ -128,6 +128,16 @@ export const signOutUser = async (): Promise<void> => {
   }
 
   try {
+    // Clear server session first
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+    }).catch((error) => {
+      console.error("Failed to clear server session:", error);
+      // Continue with local logout even if server call fails
+    });
+
+    // Then sign out from Firebase
     await signOut(auth);
   } catch (error) {
     console.error("Sign out error:", error);
