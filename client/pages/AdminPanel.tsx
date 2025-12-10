@@ -326,9 +326,9 @@ export default function AdminPanel() {
               </div>
               <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {/* Country Dropdown */}
-                <div className="relative group">
+                <div className="relative group animate-slideInDown" style={{ animationDelay: "0.35s" }}>
                   <label className="text-xs font-bold text-foreground block mb-2 flex items-center gap-1.5">
-                    <GlobeIcon className="w-3 h-3 text-muted-foreground" />
+                    <GlobeIcon className="w-3 h-3 text-muted-foreground flex-shrink-0" />
                     Country
                   </label>
                   <input
@@ -338,7 +338,7 @@ export default function AdminPanel() {
                     }
                     value={countrySearch}
                     onChange={(e) => setCountrySearch(e.target.value)}
-                    className="w-full px-3 py-2 bg-background/60 border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-xs transition-all"
+                    className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 bg-background/60 border border-border hover:border-muted rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-muted/50 focus:border-muted text-xs transition-all"
                   />
                   {countrySearch && (
                     <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg z-50 max-h-40 overflow-y-auto shadow-lg">
@@ -350,9 +350,9 @@ export default function AdminPanel() {
                               setSelectedCountry(country);
                               setCountrySearch("");
                             }}
-                            className="w-full text-left px-3 py-2 hover:bg-muted text-foreground text-xs transition-all duration-200 flex items-center gap-2"
+                            className="w-full text-left px-2.5 sm:px-3 py-1.5 sm:py-2 hover:bg-muted text-foreground text-xs transition-all duration-200 flex items-center gap-2"
                           >
-                            <GlobeIcon className="w-3 h-3 text-muted-foreground" />
+                            <GlobeIcon className="w-3 h-3 text-muted-foreground flex-shrink-0" />
                             {country}
                           </button>
                         ))
@@ -369,7 +369,7 @@ export default function AdminPanel() {
                         setSelectedCountry("");
                         setCountrySearch("");
                       }}
-                      className="absolute top-3 right-3 text-accent hover:text-accent/80 hover:scale-110 transition-all"
+                      className="absolute top-2 right-2 text-accent hover:text-accent/80 hover:scale-110 transition-all"
                       title="Clear selection"
                     >
                       <CloseIcon className="w-3 h-3" />
